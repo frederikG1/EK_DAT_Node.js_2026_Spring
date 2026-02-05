@@ -45,7 +45,7 @@ link:00._Course_Material/01._Assignments/01._Introduction/REST_API_Design.md[RES
 | 02. First Server
 | Feb. 5th
 a|
-* Code conventions / Clean Code (Strict Mode - ESLint).
+* Code conventions / Clean Code (Strict Mode).
 * Variables and Functions.
 * Callback functions.
 * Build tools and package managers.
