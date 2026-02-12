@@ -3,6 +3,7 @@ const express = require('express');
 // instantiate express
 const app = express();
 
+app.use(express.json());
 
 // one-liner version:
 // const app = require('express')();
@@ -31,9 +32,18 @@ app.get('/cars/:carModel/:year', (req, res) => {
 
 // query string / query parameters
 // ?parametername=value&parametertwo=valuetwo
-app.get("/bag", (req, res) => {
+app.get('/bag', (req, res) => {
     res.send({ data: req.query });
 });
+
+app.post('/dinosaurs', (req, res) => {
+    console.log(req.body);
+
+    res.send({ data: req.body });
+});
+
+// assignment: create a POST route with the endpoint /energydrinks that adds energy drinks to an array
+
 
 
 
