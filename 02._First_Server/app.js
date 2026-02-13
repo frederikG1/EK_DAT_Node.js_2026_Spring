@@ -1,42 +1,91 @@
-//import express 
+// import express
 const express = require('express');
-//instansiate express
+// instantiate express
 const app = express();
 
-//one-liner version:
-//const app = require('express')();
+app.use(express.json());
+
+// one-liner version:
+// const app = require('express')();
+
 
 
 app.get('/', (req, res) => {
-    res.send({data: "Hello"})
+    res.sendFile(__dirname + '/index.html');
 });
 
-app.get('/snowstorm', (req, res) => {
-    res.send("snowstorm is coming")
-});
-
-
-//how can we send data in a GET request?
-
-//query string / query parameters
-//?parametername=value (?firstitem=banana)
-//?parametername=value&secondparamater=value
-app.get("/bag", (req, res) => {
-    res.send({data: req.query} )
+app.get('/xss', (req, res) => {
+    res.sendFile(__dirname + '/xss.html');
 });
 
 
-//path variable
-//a callback function is a function that is passed as an argument to another function
+
+// task create a new route called snowstorms, it should respond with a warning
+app.get('/snowstorms', (req, res) => {
+    res.send({ data: "Snowstorm is coming." });
+});
+
+// Question: how can we send data in a GET request?
+
+// path variable
 app.get('/cars/:carModel/:year', (req, res) => {
     console.log(req.params);
-    res.send({data: `Your ${req.params.carModel} from ${req.params.year} is very nice`});
+    res.send({ data: `
+        Your ${req.params.carModel} is very nice.
+        Is it from the year ${req.params.year}?
+    ` });
 });
 
-//listen to a port
+// query string / query parameters
+// ?parametername=value&parametertwo=valuetwo
+app.get('/bag', (req, res) => {
+    res.send({ data: req.query });
+});
+
+let dinosaurs = [];
+
+app.post('/dinosaurs', (req, res) => {
+    console.log(req.body);
+
+    dinosaurs.push(req.body);
+
+    res.send({ data: req.body });
+});
+
+app.get('/dinosaurs', (req, res) => {
+    res.sendFile(__dirname + '/dinosaurs.html')
+    res.send({ dinosaurs: dinosaurs})
+});
+
+
+// assignment: create a POST route with the endpoint /energydrinks that adds energy drinks to an array
+
+let energydrinks = [];
+
+app.post('/energydrinks', (req, res) => {
+    console.log(req.body); 
+
+    energydrinks.push(req.body);
+
+    res.send({ data: req.body})
+})
+
+app.get('/energydrinks', (req, res) => {
+    res.send({ energydrinks: energydrinks})
+})
+
+
+//This is going in git bash
+// curl -X POST http://localhost:3000/energydrinks \
+//   -H "Content-Type: application/json" \
+//   -d '{"name": "Red Bull", "caffeine": "80mg"}'
+
+
+
+
+
+
+
 app.listen(8080, () => {
-    console.log("Server is running on localhost:8080")
+    console.log("App is starting on localhost:8080")
 });
-
-
-

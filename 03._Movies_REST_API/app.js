@@ -1,14 +1,16 @@
 const express = require('express');
 const app = express();
+app.use(express.json());
 
 const movies = [
-    { id: 1, title: 'Garlic is as good as ten mothers' },
+    { id: 1, title: 'Garlic is as good as ten mother' },
     { id: 2, title: 'Microscopic Subway to Oblivion' }
 ];
 
 app.get("/movies", (req, res) => {
     res.send({ data: movies });
 });
+
 
 app.get("/movies/:id", (req, res) => {
     const providedMovieId = Number(req.params.id);
