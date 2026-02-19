@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>First Server</title>
+</head>
+<body>
+    <h1>Frontpage</h1>
+    
+    <h3 id="movies"></h3>
+   
+    <script>
+        // assignment: create a fetch to /snowstorms and console.log the warning and show it on the page
+
+        fetch('/movies', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: 'New movie', year: 1992})
+        })
+        .then(response => response.json())
+        .then(result => {
+            console.log(result);
+            document.getElementById('movies').textContent = result.data.title;
+        });
+    </script>
+</body>
+</html>

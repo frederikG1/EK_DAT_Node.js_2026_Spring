@@ -13,6 +13,10 @@ app.get("/movies", (req, res) => {
     res.send({ data: movies });
 });
 
+app.get("/", (req, res) => {
+    res.sendFile(__dirname + '/index.html');
+});
+
 
 app.get("/movies/:id", (req, res) => {
     const providedMovieId = Number(req.params.id);
@@ -41,18 +45,18 @@ app.post('/movies', (req, res) => {
     res.status(200).send({data: newMovie})
 });
 
-app.delete('/movies/:id', (req, res) => {
-    const providedMovieId = Number(req.params.id);
-    const foundMovie = movies.find((movie) => movie.id === providedMovieId);
-    
-    if (!foundMovie) {
-        res.status(404).send({ errorMessage: `No movie found by id: ${req.params.id}` });
-    } else {
-        movies = movies.filter((movie) => movie.id !== providedMovieId);
-        // NOTE: We do NOT decrement nextId - IDs are never reused!
-        res.status(200).send({ data: foundMovie });
-    }
-});
+//en måde at kombinere to consts på 
+// const myBag = {
+//     lipstick: "red",
+//     lipstick: "blue",
+// };
+
+// const yourBag = {
+//     hairSpray: true,
+//     lipstick: "black"
+// };
+
+// console.log({...myBag, ...yourBag});
 
 app.patch('/movies/:id', (req, res) => {
     const providedMovieId = Number(req.params.id);
@@ -67,6 +71,22 @@ app.patch('/movies/:id', (req, res) => {
         res.status(200).send({data: foundMovie });
     }
 });
+
+//Kan være smart at bruge findIndex hvis arrayet er LANGT, fordi den fortsætter 'loopet' selv efter den har fundet id
+app.delete('/movies/:id', (req, res) => {
+    const providedMovieId = Number(req.params.id);
+    const foundMovie = movies.find((movie) => movie.id === providedMovieId);
+    
+    if (!foundMovie) {
+        res.status(404).send({ errorMessage: `No movie found by id: ${req.params.id}` });
+    } else {
+        movies = movies.filter((movie) => movie.id !== providedMovieId);
+        // NOTE: We do NOT decrement nextId - IDs are never reused!
+        res.status(200).send({ data: foundMovie });
+    }
+});
+
+
 /* 
     Status codes
 2xx: Success

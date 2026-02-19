@@ -74,15 +74,20 @@ app.get('/energydrinks', (req, res) => {
     res.send({ energydrinks: energydrinks})
 })
 
+app.get('/proxy', (req, res) => {
+    fetch ("https://www.google.com/")
+    .then((response) => response.text())
+    .then((result) => {
+        res.send(result);
+    });
+    //res.redirect("https://www.google.com/")
+})
+
 
 //This is going in git bash
 // curl -X POST http://localhost:3000/energydrinks \
 //   -H "Content-Type: application/json" \
 //   -d '{"name": "Red Bull", "caffeine": "80mg"}'
-
-
-
-
 
 
 

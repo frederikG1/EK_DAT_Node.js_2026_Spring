@@ -13,7 +13,7 @@
     <script>
         // assignment: create a fetch to /snowstorms and console.log the warning and show it on the page
 
-        fetch('/snowstorms')
+        fetch('/snowstorm')
         .then((response) => response.json())
         .then((result) => {
             const snowstormWarningH3 = document.getElementById('snowstorm-warning');

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 3. CSS File -->
+    <!-- <link rel="stylesheet" href="/05._HTML_Server/public/frontpage.css" /> -->
+
+    <!-- 2. CSS in HTML file -->
+     <style>
+        .frontpage-sub-title {
+            color:blue
+        }
+     </style>
+    <title>Frontpage</title>
+</head>
+<body>
+
+    <!-- 1. inline CSS skal man helst ik bruge -->
+    <h1 style="color: green;">Welcome to my website</h1>
+
+    <h3 class="frontpage-sub-title">I hope you enjoy it</h3>
+
+    <h2 id="guest-book-counter"></h2>
+    <button id="guest-book-button" onclick="incrementCounter()">Add your visit to the counter</button>
+
+
+    <!-- <script src="./frontpage.js"></script> -->
+     <script>
+        const guestBookCounter = document.getElementById('guest-book-counter');
+        let guestBookCounterValue = 0;
+
+        function incrementCounter() {
+            guestBookCounter.textContent = ++guestBookCounterValue;
+        }
+     </script>
+
+</body>
+
+</html>
