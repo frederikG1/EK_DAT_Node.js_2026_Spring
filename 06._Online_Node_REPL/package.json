@@ -1,0 +1,20 @@
+{
+  "name": "06._online_node_repl",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-dev": "cross-env PORT=8080 node app.js",
+    "start-prod": "cross-env PORT=80 node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "cross-env": "^10.1.0",
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
+  }
+}

@@ -63,27 +63,25 @@ app.patch('/movies/:id', (req, res) => {
     const foundMovie = movies.find((movie) => movie.id === providedMovieId);
 
     if(!foundMovie) {
-        res.status(404).send({ errorMessage: `No movie found by id: ${req.params.id}`})
-    } else {
-        if (req.body) (foundMovie.title) = req.body.title;
-        if (req.body) (foundMovie.year) = req.body.year;
-
-        res.status(200).send({data: foundMovie });
+        return res.status(404).send({ errorMessage: `No movie found by id: ${req.params.id}`})
     }
-});
+    
+    if (req.body.title) foundMovie.title = req.body.title;
+    if (req.body.year) foundMovie.year = req.body.year;
 
+    res.status(200).send({ data: foundMovie });
+});
 //Kan være smart at bruge findIndex hvis arrayet er LANGT, fordi den fortsætter 'loopet' selv efter den har fundet id
 app.delete('/movies/:id', (req, res) => {
     const providedMovieId = Number(req.params.id);
     const foundMovie = movies.find((movie) => movie.id === providedMovieId);
     
     if (!foundMovie) {
-        res.status(404).send({ errorMessage: `No movie found by id: ${req.params.id}` });
-    } else {
-        movies = movies.filter((movie) => movie.id !== providedMovieId);
-        // NOTE: We do NOT decrement nextId - IDs are never reused!
-        res.status(200).send({ data: foundMovie });
+        return res.status(404).send({ errorMessage: `No movie found by id: ${req.params.id}` });
     }
+
+    movies = movies.filter((movie) => movie.id !== providedMovieId);
+    res.status(204).send();
 });
 
 
